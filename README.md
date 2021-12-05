@@ -4,9 +4,15 @@ le dauphin et la daulphine
 
 ## Doc 
 
+[Video](https://www.youtube.com/watch?v=P1kvQthJw_I&list=PL2xrTwdohaTar51BfB5QA44b_nwWy_mg1&index=1)
+about how work raytracing...
 
-A good 
+classique
 [documentation](https://harm-smits.github.io/42docs/libs/minilibx)
+
+other [site](https://gontjarow.github.io/MiniLibX/)
+
+[programm](https://github.com/qst0/ft_libgfx)
 
 If you are a linux user... Follow this 
 [instruction](https://harm-smits.github.io/42docs/libs/minilibx)
