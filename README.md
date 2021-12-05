@@ -12,7 +12,7 @@ classique
 
 other [site](https://gontjarow.github.io/MiniLibX/)
 
-[programm](https://github.com/qst0/ft_libgfx)
+example of [programm](https://github.com/qst0/ft_libgfx#minilibx)
 
 If you are a linux user... Follow this 
 [instruction](https://harm-smits.github.io/42docs/libs/minilibx)
