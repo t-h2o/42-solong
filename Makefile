@@ -1,27 +1,30 @@
+INCLIB	=	/usr/lib
+
 #	Compilation setting
 
-NAME	=	program	
+NAME	=	so_long	
 
 CC		=	gcc
-FLAGS	=	-Wall -Wextra -Werror
 
 
 #	Directories
 
 DIR_SRC	=	./srcs
 DIR_OBJ	=	./objs
-DIR_INC	=	./headers/
+
+DIR_MINILIBX	=	./minilibx-linux
+
+LFLAGS	=	-I${DIR_MINILIBX} \
+			-L${DIR_MINILIBX} \
+			-lmlx -L$(INCLIB) \
+			-lXext -lX11 -lm -lbsd
 
 
 #	Sources
 
-SRCS	=	${DIR_SRC}/main.c \
-			${DIR_SRC}/foo.c
+SRCS	=	${DIR_SRC}/main.c
 
 OBJS	=	${addprefix ${DIR_OBJ}/, ${notdir ${SRCS:.c=.o}}}
-
-HEADER	=	bar.h
-
 
 RM		=	rm -f
 
@@ -31,10 +34,10 @@ vpath %.c ${DIR_SRC}
 all : ${NAME}
 
 ${NAME}:	${OBJS}
-	${CC} ${FLAGS} -o ${NAME}  ${OBJS}
+	${CC} -o ${NAME}  ${OBJS} ${LFLAGS}
 
 ${DIR_OBJ}/%.o : %.c | ${DIR_OBJ}
-	${CC} ${CFLAGS} -I ${DIR_INC} -o $@ -c $^
+	${CC} -o $@ -c $^ ${LFLAGS}
 
 ${DIR_OBJ} :
 	@mkdir -p ${DIR_OBJ}
@@ -50,4 +53,9 @@ re:		fclean all
 
 norm:
 	norminette ${SRCS}
-	norminette ${HEADER}
+
+show:
+	@printf "NAME  		: $(NAME)\n"
+	@printf "CC		: $(CC)\n"
+	@printf "LFLAGS		: $(LFLAGS)\n"
+	@printf "SRC		:	$(SRCS)\n"
