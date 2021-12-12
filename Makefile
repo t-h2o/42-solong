@@ -1,22 +1,53 @@
-NAME			=	game_theo
-SRC_MINILIBX	=	./minilibx-linux/
+#	Compilation setting
 
-SRC_DIR			=	./srcs
-OBJ_DIR			=	./objs
+NAME	=	program	
 
-SRCS			=	${SRC_DIR}/main.c
-
-CC				=	gcc
-FLAGS			=	-Wall -Werror -Wextra
-
-LIB				=	-I /usr/include
-LIBA			=	-L /usr/lib -lmlx -framework OpenGL -framework AppKit
+CC		=	gcc
+FLAGS	=	-Wall -Wextra -Werror
 
 
-# gcc -I/usr/include -O3 -I.. -g   -c -o main.o main.c
-# gcc -o mlx-test main.o -L.. -lmlx -L/usr/include/../lib -lXext -lX11 -lm -lbsd
+#	Directories
 
-${NAME}:	${SRCS}
-	gcc ${SRCS}
+DIR_SRC	=	./srcs
+DIR_OBJ	=	./objs
+DIR_INC	=	./headers/
 
-all:	${NAME}
+
+#	Sources
+
+SRCS	=	${DIR_SRC}/main.c \
+			${DIR_SRC}/foo.c
+
+OBJS	=	${addprefix ${DIR_OBJ}/, ${notdir ${SRCS:.c=.o}}}
+
+HEADER	=	bar.h
+
+
+RM		=	rm -f
+
+vpath %.c ${DIR_SRC}
+
+
+all : ${NAME}
+
+${NAME}:	${OBJS}
+	${CC} ${FLAGS} -o ${NAME}  ${OBJS}
+
+${DIR_OBJ}/%.o : %.c | ${DIR_OBJ}
+	${CC} ${CFLAGS} -I ${DIR_INC} -o $@ -c $^
+
+${DIR_OBJ} :
+	@mkdir -p ${DIR_OBJ}
+
+clean:
+	${RM} ${OBJS}
+
+fclean:	clean
+	${RM} ${NAME}
+
+re:		fclean all
+
+
+norm:
+	norminette ${SRCS}
+	norminette ${HEADER}
