@@ -21,3 +21,12 @@ Video on the intranet
 * [introduction](https://elearning.intra.42.fr/notions/minilibx/subnotions/mlx-introduction/videos/introduction-to-minilibx#)
 * [events](https://elearning.intra.42.fr/notions/minilibx/subnotions/mlx-events/videos/minilibx-events)
 
+
+## Linux user
+
+```
+~:$ sudo apt-get install gcc make xorg libxext-dev libbsd-dev 
+~:$ git clone https://github.com/42Paris/minilibx-linux
+~:$ cd minilibx-linux
+~:$ sudo ./configure
+```
