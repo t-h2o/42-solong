@@ -12,10 +12,45 @@ static int
 		r++;
 	return (r);
 }
-int
-	main(void)
+
+static char
+	**sl_map(char *s)
 {
-	char	map[] = "./map_1.ber";
+	int		fd;
+	int		n;
+	int		i;
+	char	*l;
+	char	**r;
+
+	fd = open(s, O_RDONLY);
+	n = 0;
+	l = (char *) 1;
+	while (l)
+	{
+		l = get_next_line(fd);
+		free(l);
+		n++;
+	}
+	printf("\n\nLINE : %d\n\n", n);
+	close(fd);
+	r = malloc(sizeof(char *) * n);
+	if (!r)
+		return (0);
+	r[n] = 0;
+	fd = open(s, O_RDONLY);
+	i = 0;
+	while (i < n)
+		r[i++] = get_next_line(fd);
+	close(fd);
+	return (r);
+}
+
+int
+	main(int argc, char ** argv)
+{
+	if (argc != 2)
+		return (0);
+	
 	void	*mlx;
 	void	*mlx_win;
 
@@ -27,12 +62,17 @@ int
 
 	int		img_width;
 	int		img_height;
+	
 
+	char	**map;
+	
+	map = sl_map(argv[1]);
+	if (!map)
+		return (0);
 
 	mlx = mlx_init();
 
 	mlx_win = mlx_new_window(mlx, 1920, 1080, "So long!");
-
 
 	img_wall = mlx_xpm_file_to_image(mlx, "./Assets/wall.xpm", &img_width, &img_height);
 	img_empt = mlx_xpm_file_to_image(mlx, "./Assets/empty.xpm", &img_width, &img_height);
@@ -40,40 +80,23 @@ int
 	img_exit = mlx_xpm_file_to_image(mlx, "./Assets/exit.xpm", &img_width, &img_height);
 	img_play = mlx_xpm_file_to_image(mlx, "./Assets/player.xpm", &img_width, &img_height);
 
-
-//mlx_pixel_put(mlx, mlx_win, 300, 500,  0x12344532);
-
-
-	int		fd_ber;
-	fd_ber = open(map, O_RDONLY);
-	int		line;
-	
-	char	*getLine;
-	
-	line = 0;
-	while (line++ < 5)
-		printf("%d\t|\t%s", line, get_next_line(fd_ber));
-	
-	char	*ptr;
 	int	x;
 	int	y;
 	int	len;
+
 	y = 0;
 	while (1)
 	{
 		x = 0;
-		getLine = get_next_line(fd_ber);
-		printf("\nPTR : %p\n\n", getLine);
-		ptr = getLine;
-		if (!getLine)
+		if (!map[y / SPRITE_SIZE])
 			break ;
-		len = sl_strlen(getLine) - 1;
-		printf("\nlen : %d\t%p\n", len, getLine);
-		while (*getLine)
+		len = sl_strlen(map[y / SPRITE_SIZE]) - 1;
+		printf("\nlen : %d\n", len);
+		while (map[y / SPRITE_SIZE][x / SPRITE_SIZE])
 		{
-			if (x == 0 && *getLine != '1')
+			char	*getLine = &map[y / SPRITE_SIZE][x / SPRITE_SIZE];
+			if ((x == 0 || y == 0) && *getLine != '1')
 				printf("hole...\tX : %d\tY : %d\n", x / SPRITE_SIZE, y / SPRITE_SIZE);
-			
 			if (*getLine == 'E')
 				mlx_put_image_to_window(mlx, mlx_win, img_exit, x, y);
 			if (*getLine == 'C')
@@ -90,14 +113,13 @@ int
 			getLine++;
 			x += SPRITE_SIZE;
 		}
-		free(ptr);
 
 		y += SPRITE_SIZE;
 	}
-	close(fd_ber);
-	
-
-
-	
+	while (*map)
+	{	
+		printf("free(%p) : %s", *map, *map);
+		free(*(map++));
+	}
 	mlx_loop(mlx);
 }

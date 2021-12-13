@@ -3,9 +3,3 @@
 C for a collectible
 E for map exit
 P for the player
-1111111111111
-00010000000C1
-1000011111001
-1P0011E000001
-1111111111111
-

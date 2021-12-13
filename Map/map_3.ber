@@ -1,8 +1,3 @@
-0 for an empty space
-1 for a wall
-C for a collectible
-E for map exit
-P for the player
 11111111111111111111
 11111111100111111111
 11111110111101111111

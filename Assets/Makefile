@@ -12,8 +12,8 @@ ASS		=	assets_1.png	\
 			assets_6.png	\
 			assets_7.png	\
 
-XPM		=	${ASS:.png=.xpm}
-#XPM		=	${PNG:.png=.xpm}
+#XPM		=	${ASS:.png=.xpm}
+XPM		=	${PNG:.png=.xpm}
 
 %.xpm : %.png
 	convert $< $@
