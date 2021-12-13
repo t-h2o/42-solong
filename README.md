@@ -2,6 +2,16 @@
 
 le dauphin et la daulphine
 
+## Game
+
+### Assets
+
+
+![Sprite](Assets/assets.gif)
+
+![Map](Assets/map.png)
+
+
 ## Doc 
 
 [Video](https://www.youtube.com/watch?v=P1kvQthJw_I&list=PL2xrTwdohaTar51BfB5QA44b_nwWy_mg1&index=1)
