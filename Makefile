@@ -1,9 +1,6 @@
-INCLIB	=	/usr/lib
-
 #	Compilation setting
 
 NAME	=	so_long	
-
 CC		=	gcc
 
 
@@ -13,12 +10,11 @@ DIR_SRC	=	./srcs
 DIR_OBJ	=	./objs
 
 DIR_MINILIBX	=	./minilibx-linux
+INCLIB			=	/usr/lib
 
-LFLAGS	=	-I${DIR_MINILIBX} \
-			-L${DIR_MINILIBX} \
-			-lmlx -L$(INCLIB) \
-			-lXext -lX11 -lm -lbsd
-
+LFLAGS	=	-I${DIR_MINILIBX}		\
+			-L${DIR_MINILIBX} -lmlx	\
+			-L$(INCLIB) -lXext -lX11 -lm -lbsd
 
 #	Sources
 
@@ -33,11 +29,11 @@ vpath %.c ${DIR_SRC}
 
 all : ${NAME}
 
-${NAME}:	${OBJS}
-	${CC} -o ${NAME}  ${OBJS} ${LFLAGS}
+$(NAME): $(OBJS)
+	$(CC) $(OBJS) -L${DIR_MINILIBX}/ -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 ${DIR_OBJ}/%.o : %.c | ${DIR_OBJ}
-	${CC} -o $@ -c $^ ${LFLAGS}
+	$(CC) -Wall -Wextra -Werror -I/usr/include -I${DIR_MINILIBX} -O3 -c $< -o $@
 
 ${DIR_OBJ} :
 	@mkdir -p ${DIR_OBJ}
