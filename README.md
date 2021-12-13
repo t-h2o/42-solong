@@ -16,6 +16,19 @@ for creating my sprites
 
 ### Map
 
+```
+0 for an empty space
+1 for a wall
+C for a collectible
+E for map exit
+P for the player
+1111111111111
+10010000000C1
+1000011111001
+1P0011E000001
+1111111111111
+```
+
 ![Map](Assets/readme/map.png)
 
 ## Doc 
