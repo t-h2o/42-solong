@@ -1,6 +1,11 @@
 #ifndef SL_H
 # define SL_H
-# define BUFFER_SIZE 42
+
+	//	Constant
+
+# define	SPRITE_SIZE 64
+# define	BUFFER_SIZE 42
+
 	//	include
 
 # include	<unistd.h>

@@ -9,14 +9,14 @@ le dauphin et la daulphine
 I use [Pixelorama](https://github.com/Orama-Interactive/Pixelorama)
 for creating my sprites
 
-![Sprite](Assets/assets.gif)
+![Sprite](Assets/readme/assets.gif)
 
-![all](Assets/assets.png)
+![all](Assets/readme/assets.png)
 
 
 ### Map
 
-![Map](Assets/map.png)
+![Map](Assets/readme/map.png)
 
 ## Doc 
 

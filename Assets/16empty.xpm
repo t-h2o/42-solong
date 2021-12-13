@@ -1,0 +1,25 @@
+/* XPM */
+static char *_6empty[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 3 1 ",
+"  c #AE1C56",
+". c #5FF315",
+"X c #C815F3",
+/* pixels */
+"XXXXXX....XXXXXX",
+"XXXXXX....XXXXXX",
+"XXXXXX....XXXXXX",
+"XXXXXX....XXXXXX",
+"XXXXXX....XXXXXX",
+"XXXXX......XXXXX",
+"................",
+".......  .......",
+".......  .......",
+"................",
+"XXXXX......XXXXX",
+"XXXXXX....XXXXXX",
+"XXXXXX....XXXXXX",
+"XXXXXX....XXXXXX",
+"XXXXXX....XXXXXX",
+"XXXXXX....XXXXXX"
+};

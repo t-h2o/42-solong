@@ -4,8 +4,16 @@ PNG		=	empty.png	\
 			player.png	\
 			collectible.png
 
+ASS		=	assets_1.png	\
+			assets_2.png	\
+			assets_3.png	\
+			assets_4.png	\
+			assets_5.png	\
+			assets_6.png	\
+			assets_7.png	\
 
-XPM		=	${PNG:.png=.xpm}
+XPM		=	${ASS:.png=.xpm}
+#XPM		=	${PNG:.png=.xpm}
 
 %.xpm : %.png
 	convert $< $@

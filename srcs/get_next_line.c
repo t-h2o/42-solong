@@ -113,7 +113,7 @@ char
 		{
 			n = read(fd, buff, BUFFER_SIZE);
 			if (!n && !line)
-				return (0);
+				return (gnl_decal(buff, BUFFER_SIZE - 1));
 			if (!n)
 				return (line);
 		}
