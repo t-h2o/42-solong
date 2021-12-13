@@ -11,8 +11,9 @@ for creating my sprites
 
 ![Sprite](Assets/assets.gif)
 
-![Map](Assets/map.png)
+### Map
 
+![Map](Assets/map.png)
 
 ## Doc 
 
