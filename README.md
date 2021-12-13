@@ -6,6 +6,8 @@ le dauphin et la daulphine
 
 ### Assets
 
+I use [Pixelorama](https://github.com/Orama-Interactive/Pixelorama)
+for creating my sprites
 
 ![Sprite](Assets/assets.gif)
 
