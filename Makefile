@@ -18,7 +18,8 @@ LFLAGS	=	-I${DIR_MINILIBX}		\
 
 #	Sources
 
-SRCS	=	${DIR_SRC}/main.c
+SRCS	=	${DIR_SRC}/main.c	\
+			${DIR_SRC}/get_next_line.c
 
 OBJS	=	${addprefix ${DIR_OBJ}/, ${notdir ${SRCS:.c=.o}}}
 
