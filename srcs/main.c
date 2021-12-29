@@ -1,17 +1,4 @@
-#include	"mlx.h"
-#include	"mlx_int.h"
 #include	"sl.h"
-
-static int
-	sl_strlen(char *s)
-{
-	int	r;
-
-	r = 0;
-	while (s[r])
-		r++;
-	return (r);
-}
 
 static char
 	**sl_map(char *s)
@@ -46,80 +33,97 @@ static char
 }
 
 int
-	main(int argc, char ** argv)
+	sl_conv(char c)
 {
-	if (argc != 2)
-		return (0);
-	
-	void	*mlx;
-	void	*mlx_win;
+	if (c == 'E')
+		return (4);
+	if (c == 'C')
+		return (3);	
+	if (c == 'P')
+		return (2);
+	return(c - '0');
+}
 
-	void	*img_wall;
-	void	*img_empt;
-	void	*img_coll;
-	void	*img_exit;
-	void	*img_play;
+void
+	sl_displaymap(char ** map, void ** img)
+{
+	int	x;
+	int	y;
+	int	xi;
+	int	yi;
+	int	c;
 
+	x = 0;
+	xi = 0;
+	y = -1;
+	yi = 0;
+	while (map[++y])
+	{
+		x = -1;
+		xi = 0;
+		while (map[y][++x])
+		{
+			c = sl_conv(map[y][x]);
+			if (c != -38)
+				mlx_put_image_to_window(img[5], img[6], img[c], xi, yi);
+			xi += SPRITE_SIZE;
+		}
+		yi += SPRITE_SIZE;
+	}
+}
+	/*
+	0 empt
+	1 wall
+	2 play
+	3 coll
+	4 exit
+	5 MLX
+	6 MLX_WIN
+	*/
+
+static void
+	sl_ptr(void ** img)
+{
 	int		img_width;
 	int		img_height;
-	
 
+	img[5] = mlx_init();
+	img[6] = mlx_new_window(img[5], 1920, 1080, "So long!");
+	img[0] = mlx_xpm_file_to_image(img[5], "./Assets/empty.xpm", &img_width, &img_height);
+	img[1] = mlx_xpm_file_to_image(img[5], "./Assets/wall.xpm", &img_width, &img_height);
+	img[2] = mlx_xpm_file_to_image(img[5], "./Assets/player.xpm", &img_width, &img_height);
+	img[3] = mlx_xpm_file_to_image(img[5], "./Assets/collectible.xpm", &img_width, &img_height);
+	img[4] = mlx_xpm_file_to_image(img[5], "./Assets/exit.xpm", &img_width, &img_height);
+}
+
+int
+	main(int argc, char ** argv)
+{
+	void	*img[7];
 	char	**map;
-	
+
+	if (argc != 2)
+		return (0);
 	map = sl_map(argv[1]);
 	if (!map)
 		return (0);
-
-	mlx = mlx_init();
-
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "So long!");
-
-	img_wall = mlx_xpm_file_to_image(mlx, "./Assets/wall.xpm", &img_width, &img_height);
-	img_empt = mlx_xpm_file_to_image(mlx, "./Assets/empty.xpm", &img_width, &img_height);
-	img_coll = mlx_xpm_file_to_image(mlx, "./Assets/collectible.xpm", &img_width, &img_height);
-	img_exit = mlx_xpm_file_to_image(mlx, "./Assets/exit.xpm", &img_width, &img_height);
-	img_play = mlx_xpm_file_to_image(mlx, "./Assets/player.xpm", &img_width, &img_height);
-
-	int	x;
+	sl_ptr(img);
 	int	y;
-	int	len;
 
 	y = 0;
-	while (1)
+	
+	while (map[y])
 	{
-		x = 0;
-		if (!map[y / SPRITE_SIZE])
-			break ;
-		len = sl_strlen(map[y / SPRITE_SIZE]) - 1;
-		printf("\nlen : %d\n", len);
-		while (map[y / SPRITE_SIZE][x / SPRITE_SIZE])
-		{
-			char	*getLine = &map[y / SPRITE_SIZE][x / SPRITE_SIZE];
-			if ((x == 0 || y == 0) && *getLine != '1')
-				printf("hole...\tX : %d\tY : %d\n", x / SPRITE_SIZE, y / SPRITE_SIZE);
-			if (*getLine == 'E')
-				mlx_put_image_to_window(mlx, mlx_win, img_exit, x, y);
-			if (*getLine == 'C')
-				mlx_put_image_to_window(mlx, mlx_win, img_coll, x, y);
-			if (*getLine == '1')
-			{
-				mlx_put_image_to_window(mlx, mlx_win, img_wall, x, y);
-				printf("WALL...\tX : %d\tY : %d\n", x / SPRITE_SIZE, y / SPRITE_SIZE);
-			}
-			if (*getLine == '0')
-				mlx_put_image_to_window(mlx, mlx_win, img_empt, x, y);
-			if (*getLine == 'P')
-				mlx_put_image_to_window(mlx, mlx_win, img_play, x, y);
-			getLine++;
-			x += SPRITE_SIZE;
-		}
-
-		y += SPRITE_SIZE;
+		printf("%s", map[y]);
+		y++;
 	}
+
+	sl_displaymap(map, img);
+	
 	while (*map)
 	{	
 		printf("free(%p) : %s", *map, *map);
 		free(*(map++));
 	}
-	mlx_loop(mlx);
+	mlx_loop(img[5]);
 }

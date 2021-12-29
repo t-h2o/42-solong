@@ -15,6 +15,10 @@
 # include	<fcntl.h>
 # include	<stdio.h>
 
+#include	"mlx.h"
+#include	"mlx_int.h"
+
 char	*get_next_line(int fd);
+int		sl_strlen(char *s);
 
 #endif /* SL_H */
