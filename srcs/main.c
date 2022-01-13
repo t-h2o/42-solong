@@ -1,5 +1,16 @@
 #include	"sl.h"
 
+typedef struct struct_info s_info;
+
+struct	struct_info {
+	int	px;
+	int py;
+	int coll;
+	int	move;
+	void **img;
+	char ** map;
+};
+
 static char
 	**sl_map(char *s)
 {
@@ -86,14 +97,102 @@ static void
 {
 	int		img_width;
 	int		img_height;
+	char	*path[5];
 
+	path[0] = "./Assets/empty.xpm";
+	path[1] = "./Assets/wall.xpm";
+	path[2] = "./Assets/player.xpm";
+	path[3] = "./Assets/collectible.xpm";
+	path[4] = "./Assets/exit.xpm";
 	img[5] = mlx_init();
 	img[6] = mlx_new_window(img[5], 1920, 1080, "So long!");
-	img[0] = mlx_xpm_file_to_image(img[5], "./Assets/empty.xpm", &img_width, &img_height);
-	img[1] = mlx_xpm_file_to_image(img[5], "./Assets/wall.xpm", &img_width, &img_height);
-	img[2] = mlx_xpm_file_to_image(img[5], "./Assets/player.xpm", &img_width, &img_height);
-	img[3] = mlx_xpm_file_to_image(img[5], "./Assets/collectible.xpm", &img_width, &img_height);
-	img[4] = mlx_xpm_file_to_image(img[5], "./Assets/exit.xpm", &img_width, &img_height);
+	img[0] = mlx_xpm_file_to_image(img[5], path[0], &img_width, &img_height);
+	img[1] = mlx_xpm_file_to_image(img[5], path[1], &img_width, &img_height);
+	img[2] = mlx_xpm_file_to_image(img[5], path[2], &img_width, &img_height);
+	img[3] = mlx_xpm_file_to_image(img[5], path[3], &img_width, &img_height);
+	img[4] = mlx_xpm_file_to_image(img[5], path[4], &img_width, &img_height);
+}
+
+void
+	it_is_the_end(s_info * param)
+{
+	char ** map = param->map;
+	while (*map)
+	{	
+		printf("free(%p) : %s", *map, *map);
+		free(*(map++));
+	}
+	
+	void ** img = param->img;
+	mlx_destroy_window(img[5], img[6]);
+	exit(0);
+}
+
+void
+	move_player(int movex, int movey, s_info * param)
+{
+	printf("coll : %d\n", param->coll);
+	if (param->map[param->py + movey][param->px + movex] == '1')
+		return ;
+	if (param->map[param->py + movey][param->px + movex] == 'E')
+	{
+		if (!param->coll)
+			it_is_the_end(param);
+		return ;	
+	}
+	if (param->map[param->py + movey][param->px + movex] == 'C')
+		param->coll--;
+	param->move++;
+	printf("move number : %d\n", param->move);
+	param->map[param->py][param->px] = '0';
+	param->px += movex;
+	param->py += movey;
+	param->map[param->py][param->px] = 'P';
+	sl_displaymap(param->map, param->img);
+}
+
+int
+	deal_key(int key, void * param)
+{
+	if (key == 97)				//	A
+		move_player(-1 , 0, param);
+	else if (key == 115)		//	S
+		move_player(0, 1, param);
+	else if (key == 100)		//	D
+		move_player(1, 0, param);
+	else if (key == 119)		//	W
+		move_player(0, -1, param);
+	else if (key == 65307)		// ESC
+		it_is_the_end(param);
+	else
+		printf("key pressed : %d\n", key);
+	return (0);
+}
+
+void
+	find_player(char ** map, int * x, int * y, int * coll)
+{
+	int	line;
+	int	colo;
+	
+	line = 0;
+	*coll = 0;
+	while (map[line])
+	{
+		colo = 0;
+		while (map[line][colo])
+		{
+			if (map[line][colo] == 'C')
+				(*coll)++;
+			if (map[line][colo] == 'P')
+			{
+				*x = colo;
+				*y = line;
+			}
+			colo++;
+		}
+		line++;	
+	}
 }
 
 int
@@ -120,10 +219,12 @@ int
 
 	sl_displaymap(map, img);
 	
-	while (*map)
-	{	
-		printf("free(%p) : %s", *map, *map);
-		free(*(map++));
-	}
+	s_info info;
+	find_player(map, &info.px, &info.py, &info.coll);
+	printf("X .. %d\n", info.px);
+	info.map = map;
+	info.img = img;
+	info.move = 0;
+	mlx_key_hook(img[6], deal_key, (void *)&info);
 	mlx_loop(img[5]);
 }
