@@ -49,7 +49,7 @@ static char
 	char	*r;
 	ssize_t	n;
 
-	n = gnl_skip(s, '\n') + 1;
+	n = gnl_skip(s, '\n');
 	r = (char *)malloc(n + 1);
 	if (!r)
 		return (0);
@@ -63,8 +63,8 @@ static char
 static char
 	*gnl_strjoin(char *s1, char *s2)
 {
-	ssize_t	len;
 	ssize_t	i;
+	ssize_t	len;
 	char	*r;
 
 	if (!s1)
@@ -74,11 +74,10 @@ static char
 			return (0);
 		s1[0] = 0;
 	}
-	len = gnl_skip(s1, '\0') + gnl_skip(s2, '\0');
-	r = (char *)malloc(len + 1);
+	r = (char *)malloc(gnl_skip(s1, '\0') + gnl_skip(s2, '\0') + 1);
 	if (!r)
 		return (0);
-	r[len] = 0;
+	r[sizeof(r) - 1] = 0;
 	i = 0;
 	len = 0;
 	while (s1[i])
