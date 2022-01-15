@@ -81,6 +81,9 @@ void
 		}
 		yi += SPRITE_SIZE;
 	}
+	printf("x %d , y %d\n", xi, yi);
+	mlx_string_put(img[5], img[6], 10, yi + 32, 0x00ff0000, "Move :");
+	mlx_string_put(img[5], img[6], 10 + 36, yi + 32, 0x00ff0000, "42");
 }
 	/*
 	0 empt
@@ -105,7 +108,7 @@ static void
 	path[3] = "./Assets/collectible.xpm";
 	path[4] = "./Assets/exit.xpm";
 	img[5] = mlx_init();
-	img[6] = mlx_new_window(img[5], 1920, 1080, "So long!");
+	img[6] = mlx_new_window(img[5], 832, 384, "So long!");
 	img[0] = mlx_xpm_file_to_image(img[5], path[0], &img_width, &img_height);
 	img[1] = mlx_xpm_file_to_image(img[5], path[1], &img_width, &img_height);
 	img[2] = mlx_xpm_file_to_image(img[5], path[2], &img_width, &img_height);
