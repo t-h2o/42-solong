@@ -119,7 +119,7 @@ void
 	char ** map = param->map;
 	while (*map)
 	{	
-		printf("free(%p) : %s", *map, *map);
+		printf("free(%p) : %s\n", *map, *map);
 		free(*(map++));
 	}
 	
@@ -154,15 +154,15 @@ void
 int
 	deal_key(int key, void * param)
 {
-	if (key == 97)				//	A
+	if (key == KEY_LEFT || key == KEY_A)
 		move_player(-1 , 0, param);
-	else if (key == 115)		//	S
+	else if (key == KEY_DOWN || key == KEY_S)
 		move_player(0, 1, param);
-	else if (key == 100)		//	D
+	else if (key == KEY_RIGHT || key == KEY_D)
 		move_player(1, 0, param);
-	else if (key == 119)		//	W
+	else if (key == KEY_UP || key == KEY_W)
 		move_player(0, -1, param);
-	else if (key == 65307)		// ESC
+	else if (key == KEY_ESC)
 		it_is_the_end(param);
 	else
 		printf("key pressed : %d\n", key);
@@ -213,7 +213,7 @@ int
 	
 	while (map[y])
 	{
-		printf("%s", map[y]);
+		printf("%s\n", map[y]);
 		y++;
 	}
 
@@ -221,7 +221,6 @@ int
 	
 	s_info info;
 	find_player(map, &info.px, &info.py, &info.coll);
-	printf("X .. %d\n", info.px);
 	info.map = map;
 	info.img = img;
 	info.move = 0;
