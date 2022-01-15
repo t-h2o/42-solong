@@ -1,6 +1,17 @@
 #ifndef SL_H
 # define SL_H
 
+typedef struct struct_info s_info;
+
+struct	struct_info {
+	int	px;
+	int py;
+	int coll;
+	int	move;
+	void **img;
+	char ** map;
+};
+
 	//	Constant
 
 # define	SPRITE_SIZE 64
@@ -30,7 +41,13 @@
 #include	"mlx.h"
 #include	"mlx_int.h"
 
+
+	//	get_next_line.c
+
 char	*get_next_line(int fd);
-int		sl_strlen(char *s);
+
+	//	map.c
+
+char	**sl_map(char * s);
 
 #endif /* SL_H */

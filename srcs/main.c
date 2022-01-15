@@ -1,48 +1,5 @@
 #include	"sl.h"
 
-typedef struct struct_info s_info;
-
-struct	struct_info {
-	int	px;
-	int py;
-	int coll;
-	int	move;
-	void **img;
-	char ** map;
-};
-
-static char
-	**sl_map(char *s)
-{
-	int		fd;
-	int		n;
-	int		i;
-	char	*l;
-	char	**r;
-
-	fd = open(s, O_RDONLY);
-	n = 0;
-	l = (char *) 1;
-	while (l)
-	{
-		l = get_next_line(fd);
-		free(l);
-		n++;
-	}
-	printf("\n\nLINE : %d\n\n", n);
-	close(fd);
-	r = malloc(sizeof(char *) * n);
-	if (!r)
-		return (0);
-	r[n] = 0;
-	fd = open(s, O_RDONLY);
-	i = 0;
-	while (i < n)
-		r[i++] = get_next_line(fd);
-	close(fd);
-	return (r);
-}
-
 int
 	sl_conv(char c)
 {
@@ -221,7 +178,7 @@ int
 	}
 
 	sl_displaymap(map, img);
-	
+
 	s_info info;
 	find_player(map, &info.px, &info.py, &info.coll);
 	info.map = map;
