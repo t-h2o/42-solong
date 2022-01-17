@@ -54,7 +54,7 @@ Video on the intranet
 ## Linux user
 
 ```
-~:$ sudo apt-get install gcc make xorg libxext-dev libbsd-dev 
+~:$ sudo apt-get install xorg libxext-dev zlib1g-dev gcc make xorg libxext-dev libbsd-dev 
 ~:$ git clone https://github.com/42Paris/minilibx-linux
 ~:$ cd minilibx-linux
 ~:$ sudo ./configure
