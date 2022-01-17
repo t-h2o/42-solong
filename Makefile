@@ -20,6 +20,7 @@ LFLAGS	=	-I${DIR_MINILIBX}		\
 
 SRCS	=	${DIR_SRC}/main.c	\
 			${DIR_SRC}/map.c	\
+			${DIR_SRC}/player.c	\
 			${DIR_SRC}/get_next_line.c
 
 OBJS	=	${addprefix ${DIR_OBJ}/, ${notdir ${SRCS:.c=.o}}}

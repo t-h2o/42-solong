@@ -51,4 +51,9 @@ char	*get_next_line(int fd);
 
 char	**sl_map(char *s, int *lenght, int *width);
 
+	//	player.c
+
+int		deal_key(int key, void *param);
+void	sl_displaymap(char **map, void **img);
+
 #endif /* SL_H */
