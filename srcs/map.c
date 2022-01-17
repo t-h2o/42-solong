@@ -1,7 +1,7 @@
 #include	"sl.h"
 
 static int
-	all_one(char * line, int * len)
+	all_one(char *line, int *len)
 {
 	int	i;
 
@@ -24,7 +24,7 @@ static int
 }
 
 static int
-	map_error(char ** map)
+	map_error(char **map, int *lenght)
 {
 	int	i;
 	int	j;
@@ -54,50 +54,68 @@ static int
 	}
 	if (all_one(map[j - 1], &len))
 		return (1);
+	*lenght = len;
 	return (0);
 }
 
-static char
-	**map_create(char *s)
+static int
+	width_counter(char *s)
 {
+	char	*l;
 	int		fd;
 	int		n;
-	int		i;
-	char	*l;
-	char	**r;
 
+	n = 0;
 	fd = open(s, O_RDONLY);
+	if (read(fd, 0, 0) != 0)
+		exit(0);
 	n = 0;
 	l = (char *) 1;
 	while (l)
 	{
 		l = get_next_line(fd);
+		if (!n && !l)
+			exit(0);
 		free(l);
 		n++;
 	}
-	printf("\n\nLINE : %d\n\n", n);
+	if (n < 4)
+		exit(0);
 	close(fd);
-	r = malloc(sizeof(char *) * n);
+	return (n);
+}
+
+static char
+	**map_create(char *s, int *width)
+{
+	int		fd;
+	int		i;
+	char	**r;
+
+	*width = width_counter(s);
+	r = malloc(sizeof(char *) * *width);
 	if (!r)
 		return (0);
-	r[n] = 0;
+	r[*width] = 0;
 	fd = open(s, O_RDONLY);
 	i = 0;
-	while (i < n)
+	while (i < *width)
 		r[i++] = get_next_line(fd);
 	close(fd);
 	return (r);
 }
 
 char
-	**sl_map(char *s)
+	**sl_map(char *s, int *lenght, int *width)
 {
-	char ** r;
+	char	**r;
 
-	r = map_create(s);
+	*lenght = 0;
+	*width = 0;
+	r = map_create(s, width);
 	if (!r)
 		exit(0);
-	if (map_error(r))
+	if (map_error(r, lenght))
 		exit(0);
 	return (r);
 }

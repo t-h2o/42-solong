@@ -53,7 +53,7 @@ void
 	*/
 
 static void
-	sl_ptr(void ** img)
+	sl_ptr(void ** img, int lenght, int width)
 {
 	int		img_width;
 	int		img_height;
@@ -65,7 +65,8 @@ static void
 	path[3] = "./Assets/collectible.xpm";
 	path[4] = "./Assets/exit.xpm";
 	img[5] = mlx_init();
-	img[6] = mlx_new_window(img[5], 832, 384, "So long!");
+	printf("\n\nWINDOW SIZE %d x %d\n\n", lenght * 64, width * 64);
+	img[6] = mlx_new_window(img[5], lenght * 64, width * 64, "So long!");
 	img[0] = mlx_xpm_file_to_image(img[5], path[0], &img_width, &img_height);
 	img[1] = mlx_xpm_file_to_image(img[5], path[1], &img_width, &img_height);
 	img[2] = mlx_xpm_file_to_image(img[5], path[2], &img_width, &img_height);
@@ -160,13 +161,16 @@ int
 {
 	void	*img[7];
 	char	**map;
+	s_info	info;
 
 	if (argc != 2)
 		return (0);
-	map = sl_map(argv[1]);
+	map = sl_map(argv[1], &info.lenght, &info.width);
 	if (!map)
 		return (0);
-	sl_ptr(img);
+
+	printf("\n\nWINDOW SIZE : %d x %d\n\n", info.lenght, info.width);
+	sl_ptr(img, info.lenght, info.width);
 	int	y;
 
 	y = 0;
@@ -179,7 +183,6 @@ int
 
 	sl_displaymap(map, img);
 
-	s_info info;
 	find_player(map, &info.px, &info.py, &info.coll);
 	info.map = map;
 	info.img = img;
