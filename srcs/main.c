@@ -75,7 +75,7 @@ static void
 }
 
 void
-	it_is_the_end(s_info * param)
+	it_is_the_end(t_info * param)
 {
 	char ** map = param->map;
 	while (*map)
@@ -90,7 +90,7 @@ void
 }
 
 void
-	move_player(int movex, int movey, s_info * param)
+	move_player(int movex, int movey, t_info * param)
 {
 	printf("coll : %d\n", param->coll);
 	if (param->map[param->py + movey][param->px + movex] == '1')
@@ -161,7 +161,7 @@ int
 {
 	void	*img[7];
 	char	**map;
-	s_info	info;
+	t_info	info;
 
 	if (argc != 2)
 		return (0);
