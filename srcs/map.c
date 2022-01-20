@@ -1,8 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/20 18:18:19 by tgrivel           #+#    #+#             */
+/*   Updated: 2022/01/20 18:19:06 by tgrivel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include	"sl.h"
-/* add 1 or more exit
- * add only one player
- * add 1 or more collectible
- */
+
 static int
 	all_one(char *line, int *len)
 {
@@ -36,7 +45,6 @@ static int
 	len = 0;
 	if (all_one(map[0], &len))
 		return (1);
-	printf("lenght of the 1st line : %d\n", len);
 	j = 0;
 	while (map[++j])
 	{

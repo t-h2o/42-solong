@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/20 18:17:02 by tgrivel           #+#    #+#             */
+/*   Updated: 2022/01/20 18:21:55 by tgrivel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include	"sl.h"
 
 static void
@@ -27,9 +39,13 @@ void
 {
 	int	line;
 	int	colo;
+	int	doorexit;
+	int	nbplayer;
 
+	nbplayer = 0;
 	line = 0;
 	*coll = 0;
+	doorexit = 0;
 	while (map[line])
 	{
 		colo = 0;
@@ -37,14 +53,27 @@ void
 		{
 			if (map[line][colo] == 'C')
 				(*coll)++;
+			if (map[line][colo] == 'E')
+				doorexit++;
 			if (map[line][colo] == 'P')
 			{
+				if (nbplayer)
+				{
+					printf("Error, there is more than 1 player\n");
+					exit(0);
+				}
 				*x = colo;
 				*y = line;
+				nbplayer = 1;
 			}
 			colo++;
 		}
 		line++;
+	}
+	if (!coll || !doorexit)
+	{
+		printf("Error, there is 0 item or 0 exit door\n");
+		exit(0);
 	}
 }
 
@@ -52,31 +81,19 @@ int
 	main(int argc, char **argv)
 {
 	void	*img[7];
-	char	**map;
-	int		y;
 	t_info	info;
 
 	if (argc != 2)
 		return (0);
-	map = sl_map(argv[1], &info.lenght, &info.width);
-	if (!map)
+	info.map = sl_map(argv[1], &info.lenght, &info.width);
+	if (!info.map)
 		return (0);
 
 	printf("\n\nWINDOW SIZE : %d x %d\n\n", info.lenght, info.width);
 	sl_ptr(img, info.lenght, info.width);
 
-	y = 0;
-
-	while (map[y])
-	{
-		printf("%s\n", map[y]);
-		y++;
-	}
-
-	sl_displaymap(map, img);
-
-	find_player(map, &info.px, &info.py, &info.coll);
-	info.map = map;
+	find_player(info.map, &info.px, &info.py, &info.coll);
+	sl_displaymap(info.map, img);
 	info.img = img;
 	info.move = 0;
 	mlx_key_hook(img[6], deal_key, (void *)&info);
