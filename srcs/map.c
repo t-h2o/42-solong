@@ -1,5 +1,8 @@
 #include	"sl.h"
-
+/* add 1 or more exit
+ * add only one player
+ * add 1 or more collectible
+ */
 static int
 	all_one(char *line, int *len)
 {
@@ -93,7 +96,7 @@ static char
 	char	**r;
 
 	*width = width_counter(s);
-	r = malloc(sizeof(char *) * *width);
+	r = (char **)malloc(sizeof(char *) * *width);
 	if (!r)
 		return (0);
 	r[*width] = 0;
@@ -114,7 +117,10 @@ char
 	*width = 0;
 	r = map_create(s, width);
 	if (!r)
+	{
+		printf("Error, malloc\n");
 		exit(0);
+	}
 	if (map_error(r, lenght))
 		exit(0);
 	return (r);
