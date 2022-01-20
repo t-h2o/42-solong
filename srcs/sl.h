@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sl.h                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/20 11:11:08 by tgrivel           #+#    #+#             */
+/*   Updated: 2022/01/20 11:16:15 by tgrivel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SL_H
 # define SL_H
 
@@ -10,8 +22,8 @@
 # include	<fcntl.h>
 # include	<stdio.h>
 
-# include	"mlx.h"
-# include	"mlx_int.h"
+# include	"./../mlx/mlx.h"
+//# include	"/../mlx/mlx_int.h"
 
 typedef struct s_info	t_info;
 
@@ -31,17 +43,33 @@ struct	s_info {
 # define SPRITE_SIZE 64
 # define BUFFER_SIZE 42
 
-# define KEY_A		97
-# define KEY_S		115
-# define KEY_D		100
-# define KEY_W		119
+# ifdef __APPLE__
 
-# define KEY_LEFT	65361
-# define KEY_DOWN	65364
-# define KEY_RIGHT	65363
-# define KEY_UP		65362
+#  define KEY_A		0
+#  define KEY_S		1
+#  define KEY_D		2
+#  define KEY_W		13
 
-# define KEY_ESC		65307
+#  define KEY_LEFT		123
+#  define KEY_DOWN		125
+#  define KEY_RIGHT		124
+#  define KEY_UP		126
+#  define KEY_ESC		53
+
+# elif __linux__
+
+#  define KEY_A			97
+#  define KEY_S			115
+#  define KEY_D			100
+#  define KEY_W			119
+
+#  define KEY_LEFT		65361
+#  define KEY_DOWN		65364
+#  define KEY_RIGHT		65363
+#  define KEY_UP		65362
+#  define KEY_ESC		65307
+
+# endif
 
 	//	get_next_line.c
 
