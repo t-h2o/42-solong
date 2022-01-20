@@ -32,8 +32,10 @@ vpath %.c ${DIR_SRC}
 
 all : ${NAME}
 
+#	LINUX Compilation
+#	$(CC) $(OBJS) -L${DIR_MINILIBX}/ -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -L${DIR_MINILIBX}/ -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	$(CC) $(OBJS) -Imlx -Lmlx -lmlx -o $(NAME)
 
 ${DIR_OBJ}/%.o : %.c | ${DIR_OBJ}
 	$(CC) -Wall -Wextra -Werror -I/usr/include -I${DIR_MINILIBX} -O3 -c $< -o $@
