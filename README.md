@@ -7,7 +7,10 @@ le dauphin et la daulphine
 ### Assets
 
 I use [Pixelorama](https://github.com/Orama-Interactive/Pixelorama)
-for creating my sprites
+for creating my sprites.
+change file type, png to xpm.
+
+For make a transparency, find the backgound color and set to ```none```
 
 ![Sprite](Assets/readme/assets.gif)
 
