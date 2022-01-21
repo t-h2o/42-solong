@@ -22,8 +22,16 @@
 # include	<fcntl.h>
 # include	<stdio.h>
 
-# include	"./../mlx/mlx.h"
-//# include	"/../mlx/mlx_int.h"
+# ifdef __APPLE__
+
+#  include	"./../mlx/mlx.h"
+
+# elif __linux__
+
+#  include	"mlx.h"
+#  include	"mlx_int.h"
+
+# endif
 
 typedef struct s_info	t_info;
 
