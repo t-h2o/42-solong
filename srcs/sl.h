@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:11:08 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/01/22 15:20:09 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/01/22 17:12:27 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ char	**sl_map(char *s, int *lenght, int *width);
 	//	player.c
 
 int		deal_key(int key, void *param);
-void	sl_displaymap(char **map, void **img);
+void	sl_displaymap(char **map, void **img, int move);
 
 #endif /* SL_H */

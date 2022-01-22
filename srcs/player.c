@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:18:05 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/01/20 18:18:07 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/01/22 17:17:30 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static void
 	}
 	img = param->img;
 	mlx_destroy_window(img[5], img[6]);
+	printf("free(%p) : img\n", img);
+	free(img);
 	exit(0);
 }
 
@@ -70,17 +72,42 @@ static void
 	param->px += movex;
 	param->py += movey;
 	param->map[param->py][param->px] = 'P';
-	sl_displaymap(param->map, param->img);
+	sl_displaymap(param->map, param->img, param->move);
+}
+
+char
+	*ft_itoa(int n)
+{
+	char	*r;
+	int		len;
+
+	len = 1;
+	int		ten;
+	ten = 10;
+	while (n > ten)
+	{
+		len++;
+		ten *= 10;
+	}
+	r = (char *)malloc(len + 1);
+	r[len] = 0;
+	while (len-- + 1)
+	{
+		r[len] = n % 10 + '0';
+		n = n / 10;
+	}
+	return (r);
 }
 
 void
-	sl_displaymap(char **map, void **img)
+	sl_displaymap(char **map, void **img, int move)
 {
 	int	x;
 	int	y;
 	int	xi;
 	int	yi;
 	int	c;
+	char	*move_str;
 
 	x = 0;
 	xi = 0;
@@ -100,7 +127,10 @@ void
 	}
 	printf("x %d , y %d\n", xi, yi);
 	mlx_string_put(img[5], img[6], 10, yi + 32, 0x00ff0000, "Move :");
-	mlx_string_put(img[5], img[6], 10 + 36, yi + 32, 0x00ff0000, "42");
+	move_str = ft_itoa(move);
+	mlx_string_put(img[5], img[6], 10 + 136, yi + 32, 0x00ff0000, move_str);
+	printf("function ITOA of the deadth %s\n", move_str);
+	free(move_str);
 }
 
 int

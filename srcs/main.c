@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:17:02 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/01/22 15:37:11 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/01/22 17:12:00 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,24 +80,24 @@ void
 int
 	main(int argc, char **argv)
 {
-	void	*img[7];
 	t_info	info;
 
 	if (argc != 2)
 		printf("Error, missing file\n");
 	if (argc != 2)
 		return (0);
+
+	info.img = (void **)malloc(sizeof(void *) * 8);
+	info.img[7] = 0;
 	info.map = sl_map(argv[1], &info.lenght, &info.width);
 	if (!info.map)
 		return (0);
 
-	printf("\n\nWINDOW SIZE : %d x %d\n\n", info.lenght, info.width);
-	sl_ptr(img, info.lenght, info.width);
+	sl_ptr(info.img, info.lenght, info.width);
 
 	find_player(info.map, &info.px, &info.py, &info.coll);
-	sl_displaymap(info.map, img);
-	info.img = img;
+	sl_displaymap(info.map, info.img, 0);
 	info.move = 0;
-	mlx_key_hook(img[6], deal_key, (void *)&info);
-	mlx_loop(img[5]);
+	mlx_key_hook(info.img[6], deal_key, (void *)&info);
+	mlx_loop(info.img[5]);
 }
