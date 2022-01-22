@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:17:02 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/01/20 18:21:55 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/01/22 15:37:11 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int
 	void	*img[7];
 	t_info	info;
 
+	if (argc != 2)
+		printf("Error, missing file\n");
 	if (argc != 2)
 		return (0);
 	info.map = sl_map(argv[1], &info.lenght, &info.width);

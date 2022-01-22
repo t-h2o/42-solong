@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:11:08 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/01/20 11:16:15 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/01/22 15:20:09 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 # ifdef __APPLE__
 
-#  include	"./../mlx/mlx.h"
+#  include	"mlx.h"
 
 # elif __linux__
 
