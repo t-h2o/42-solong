@@ -58,7 +58,8 @@ all : ${NAME}
 
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -L${DIR_LIB_MLX}/ -Imlx-apple -lmlx -o $(NAME)
+	$(CC) $(OBJS) -L${DIR_LIB_MLX}/ -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	#$(CC) $(OBJS) -L${DIR_LIB_MLX}/ -Imlx-apple -lmlx -o $(NAME)
 
 ${DIR_OBJ}/%.o : %.c | ${DIR_OBJ}
 	$(CC) -Wall -Wextra -Werror -I/usr/include -I${DIR_LIB_MLX} -O3 -c $< -o $@

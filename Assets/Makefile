@@ -2,7 +2,8 @@ PNG		=	empty.png	\
 			wall.png	\
 			exit.png	\
 			player.png	\
-			collectible.png
+			collectible.png \
+			info.png
 
 ASS		=	assets_1.png	\
 			assets_2.png	\

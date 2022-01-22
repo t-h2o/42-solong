@@ -55,7 +55,6 @@ static void
 static void
 	move_player(int movex, int movey, t_info *param)
 {
-	printf("coll : %d\n", param->coll);
 	if (param->map[param->py + movey][param->px + movex] == '1')
 		return ;
 	if (param->map[param->py + movey][param->px + movex] == 'E')
@@ -67,7 +66,6 @@ static void
 	if (param->map[param->py + movey][param->px + movex] == 'C')
 		param->coll--;
 	param->move++;
-	printf("move number : %d\n", param->move);
 	param->map[param->py][param->px] = '0';
 	param->px += movex;
 	param->py += movey;
@@ -80,11 +78,11 @@ char
 {
 	char	*r;
 	int		len;
+	int		ten;
 
 	len = 1;
-	int		ten;
 	ten = 10;
-	while (n > ten)
+	while (n >= ten)
 	{
 		len++;
 		ten *= 10;
@@ -107,7 +105,6 @@ void
 	int	xi;
 	int	yi;
 	int	c;
-	char	*move_str;
 
 	x = 0;
 	xi = 0;
@@ -120,17 +117,18 @@ void
 		while (map[y][++x])
 		{
 			c = sl_conv(map[y][x]);
-			mlx_put_image_to_window(img[5], img[6], img[c], xi, yi);
+			mlx_put_image_to_window(img[5], img[6], img[c], x * 64, y * 64);
 			xi += SPRITE_SIZE;
 		}
 		yi += SPRITE_SIZE;
 	}
-	printf("x %d , y %d\n", xi, yi);
-	mlx_string_put(img[5], img[6], 10, yi + 32, 0x00ff0000, "Move :");
-	move_str = ft_itoa(move);
-	mlx_string_put(img[5], img[6], 10 + 136, yi + 32, 0x00ff0000, move_str);
-	printf("function ITOA of the deadth %s\n", move_str);
-	free(move_str);
+	while (xi)
+	{
+		xi -= SPRITE_SIZE;
+		mlx_put_image_to_window(img[5], img[6], img[7], xi, yi);
+	}
+	mlx_string_put(img[5], img[6], 10, yi + 37, 0x00ff0000, "Move :");
+	mlx_string_put(img[5], img[6], 10 + 36, yi + 37, 0x00ff0000, ft_itoa(move));
 }
 
 int

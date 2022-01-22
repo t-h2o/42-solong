@@ -17,21 +17,22 @@ static void
 {
 	int		img_width;
 	int		img_height;
-	char	*path[5];
+	char	*path[6];
 
 	path[0] = "./Assets/empty.xpm";
 	path[1] = "./Assets/wall.xpm";
 	path[2] = "./Assets/player.xpm";
 	path[3] = "./Assets/collectible.xpm";
 	path[4] = "./Assets/exit.xpm";
+	path[5] = "./Assets/info.xpm";
 	img[5] = mlx_init();
-	printf("\n\nWINDOW SIZE %d x %d\n\n", lenght * 64, width * 64);
 	img[6] = mlx_new_window(img[5], lenght * 64, width * 64, "So long!");
 	img[0] = mlx_xpm_file_to_image(img[5], path[0], &img_width, &img_height);
 	img[1] = mlx_xpm_file_to_image(img[5], path[1], &img_width, &img_height);
 	img[2] = mlx_xpm_file_to_image(img[5], path[2], &img_width, &img_height);
 	img[3] = mlx_xpm_file_to_image(img[5], path[3], &img_width, &img_height);
 	img[4] = mlx_xpm_file_to_image(img[5], path[4], &img_width, &img_height);
+	img[7] = mlx_xpm_file_to_image(img[5], path[5], &img_width, &img_height);
 }
 
 void
@@ -87,8 +88,8 @@ int
 	if (argc != 2)
 		return (0);
 
-	info.img = (void **)malloc(sizeof(void *) * 8);
-	info.img[7] = 0;
+	info.img = (void **)malloc(sizeof(void *) * 9);
+	info.img[8] = 0;
 	info.map = sl_map(argv[1], &info.lenght, &info.width);
 	if (!info.map)
 		return (0);
