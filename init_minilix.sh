@@ -13,8 +13,10 @@ if [ $UNAME == "Linux" ]
 then
 	echo this is a Linux os
 	yes | sudo apt-get install $LINUX_PKG
-	git clone https://github.com/44Paris/minilibx-linux mlx-linux
+	git clone https://github.com/42Paris/minilibx-linux mlx-linux
 	sudo ./mlx-linux/configure
+	make -C mlx-linux/
+	make
 	exit
 fi
 
