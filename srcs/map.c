@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:18:19 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/01/20 18:19:06 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/03 14:22:06 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static int
 	*len = i;
 	return (0);
 }
+/*	check the line if there is only '1' character
+ */
 
 static int
 	map_error(char **map, int *lenght)
@@ -95,6 +97,8 @@ static int
 	close(fd);
 	return (n);
 }
+/*	counter of line of the file
+ */
 
 static char
 	**map_create(char *s, int *width)
@@ -115,6 +119,9 @@ static char
 	close(fd);
 	return (r);
 }
+/*	malloc the memory of the map
+ *	and set every line in the map
+ */
 
 char
 	**sl_map(char *s, int *lenght, int *width)
@@ -133,3 +140,5 @@ char
 		exit(0);
 	return (r);
 }
+/*	Return a map and check if error
+ */

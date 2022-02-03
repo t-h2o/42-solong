@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:18:05 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/01/22 17:17:30 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/03 14:26:55 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,14 @@ static int
 		return (2);
 	return (c - '0');
 }
-	/*
-	0 empt
+/*	0 empt
 	1 wall
 	2 play
 	3 coll
 	4 exit
 	5 MLX
 	6 MLX_WIN
-	*/
+*/
 
 static void
 	it_is_the_end(t_info *param)
@@ -51,6 +50,8 @@ static void
 	free(img);
 	exit(0);
 }
+/*	free the map and destroy the window
+ */
 
 static void
 	move_player(int movex, int movey, t_info *param)
@@ -96,6 +97,8 @@ char
 	}
 	return (r);
 }
+/*	Return a string with a number
+ */
 
 void
 	sl_displaymap(char **map, void **img, int move)
@@ -130,6 +133,9 @@ void
 	mlx_string_put(img[5], img[6], 10, yi + 37, 0x00ff0000, "Move :");
 	mlx_string_put(img[5], img[6], 10 + 36, yi + 37, 0x00ff0000, ft_itoa(move));
 }
+/*	Every move of the player,
+ *	the map is refresh...
+ */
 
 int
 	deal_key(int key, void *param)
@@ -148,3 +154,5 @@ int
 		printf("key pressed : %d\n", key);
 	return (0);
 }
+/*	send to a function by the key
+ */

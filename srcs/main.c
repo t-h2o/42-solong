@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:17:02 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/01/22 17:12:00 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/03 14:22:05 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ static void
 	img[4] = mlx_xpm_file_to_image(img[5], path[4], &img_width, &img_height);
 	img[7] = mlx_xpm_file_to_image(img[5], path[5], &img_width, &img_height);
 }
+/*	to not be longer than 80 caracters,
+ *	I set a tab of paths...
+ *	This function set my tab of image
+ */
 
 void
 	find_player(char **map, int *x, int *y, int *coll)
@@ -77,6 +81,9 @@ void
 		exit(0);
 	}
 }
+/*	Give the position of the player by x and y.
+ *	Give the number of collectible in the map
+ */
 
 int
 	main(int argc, char **argv)
