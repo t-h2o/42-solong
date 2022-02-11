@@ -36,12 +36,25 @@ P for the player
 
 ##	program
 
-main
-* create map
-	* malloc map
-	* check map errors
+### main
+
+### create map
+
+* malloc map
+* file in map
+* check map errors
+	* number player = 1
+	* number exit >= 1
+	* number collectible >= 1
+	* wall all around
 		* yes free map
 		* no, continue
+
+### information about map
+
+* player location (x;y)
+* number of collectible
+*
 
 ## Doc 
 
