@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:18:05 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/03 14:26:55 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/11 12:13:09 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int
 	6 MLX_WIN
 */
 
-static void
+void
 	it_is_the_end(t_info *param)
 {
 	char	**map;

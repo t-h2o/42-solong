@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:17:02 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/03 14:22:05 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/11 12:15:26 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,22 @@ void
  */
 
 int
+	init_info(t_info *info, char *argv)
+{
+	info->img = (void **)malloc(sizeof(void *) * 9);
+	if (!info->img)
+		return (0);
+	info->img[8] = 0;
+	info->map = sl_map(argv, &info->lenght, &info->width);
+	if (!info->map)
+		it_is_the_end(info);
+	sl_ptr(info->img, info->lenght, info->width);
+	find_player(info->map, &info->px, &info->py, &info->coll);
+	info->move = 0;
+	return (1);
+}
+
+int
 	main(int argc, char **argv)
 {
 	t_info	info;
@@ -94,18 +110,10 @@ int
 		printf("Error, missing file\n");
 	if (argc != 2)
 		return (0);
-
-	info.img = (void **)malloc(sizeof(void *) * 9);
-	info.img[8] = 0;
-	info.map = sl_map(argv[1], &info.lenght, &info.width);
-	if (!info.map)
+	if (!init_info(&info, argv[1]))
 		return (0);
 
-	sl_ptr(info.img, info.lenght, info.width);
-
-	find_player(info.map, &info.px, &info.py, &info.coll);
 	sl_displaymap(info.map, info.img, 0);
-	info.move = 0;
 	mlx_key_hook(info.img[6], deal_key, (void *)&info);
 	mlx_loop(info.img[5]);
 }

@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:11:08 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/03 14:26:53 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/11 12:12:49 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,5 @@ char	**sl_map(char *s, int *lenght, int *width);
 
 int		deal_key(int key, void *param);
 void	sl_displaymap(char **map, void **img, int move);
-
+void	it_is_the_end(t_info *param);
 #endif /* SL_H */
