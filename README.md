@@ -34,6 +34,15 @@ P for the player
 
 ![Map](Assets/readme/map.png)
 
+##	program
+
+main
+* create map
+	* malloc map
+	* check map errors
+		* yes free map
+		* no, continue
+
 ## Doc 
 
 [Video](https://www.youtube.com/watch?v=P1kvQthJw_I&list=PL2xrTwdohaTar51BfB5QA44b_nwWy_mg1&index=1)
