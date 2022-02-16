@@ -6,7 +6,7 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 16:18:01 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/16 16:39:22 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/16 16:58:56 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void
 		it_is_the_end(info, 1, "Error, no collectible");
 	if (info->player != 1)
 		it_is_the_end(info, 1, "Error, number of player != 1");
-
 }
 /*	Give the position of the player by x and y.
  *	Give the number of collectible in the map

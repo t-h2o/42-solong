@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:18:05 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/16 12:39:33 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/16 16:58:39 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static int
 	6 MLX_WIN
 */
 
-
 static void
 	move_player(int movex, int movey, t_info *param)
 {
@@ -41,7 +40,7 @@ static void
 	if (param->map[param->py + movey][param->px + movex] == 'E')
 	{
 		if (!param->coll)
-			it_is_the_end(param, 1, "Erro, 0 collectible");
+			it_is_the_end(param, 1, "Win the game!");
 		return ;
 	}
 	if (param->map[param->py + movey][param->px + movex] == 'C')

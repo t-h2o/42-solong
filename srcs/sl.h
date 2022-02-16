@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:11:08 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/16 16:33:25 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/16 17:00:32 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 # endif
 
-typedef struct	s_info {
+typedef struct s_info {
 	int		lenght;
 	int		width;
 	int		px;
@@ -44,7 +44,7 @@ typedef struct	s_info {
 	int		move;
 	void	**img;
 	char	**map;
-} t_info;
+}	t_info;
 
 	//	Constant
 
@@ -100,4 +100,5 @@ void	sl_displaymap(char **map, void **img, int move, int coll);
 	//	info.c
 
 void	info_map(t_info *info);
+
 #endif /* SL_H */

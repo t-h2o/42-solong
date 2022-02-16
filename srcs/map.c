@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:18:19 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/16 14:59:10 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/16 16:59:39 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ static void
 	int		i;
 
 	info->map = (char **)malloc(sizeof(char *) * 16);
-	i = -1;
-	while (++i < 16)
-		info->map[i] = 0;
 	if (!info->map)
 		it_is_the_end(info, 0, "Error, malloc map");
 	fd = open(file, O_RDONLY);
