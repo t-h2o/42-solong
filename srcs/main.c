@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:17:02 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/14 18:18:15 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/16 12:44:32 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,20 +85,17 @@ void
  *	Give the number of collectible in the map
  */
 
-int
+static void
 	init_info(t_info *info, char *argv)
 {
 	info->img = (void **)malloc(sizeof(void *) * 9);
 	if (!info->img)
 		exit (0);
 	info->img[8] = 0;
-	info->map = sl_map(argv, &info->lenght, &info->width);
-	if (!info->map)
-		it_is_the_end(info);
+	sl_map(info, argv);
 	sl_ptr(info->img, info->lenght, info->width);
 	find_player(info->map, &info->px, &info->py, &info->coll);
 	info->move = 0;
-	return (1);
 }
 /*	Set info data
  *	if the 1st malloc fail, exit
@@ -110,13 +107,11 @@ int
 	t_info	info;
 
 	if (argc != 2)
-		printf("Error, missing file\n");
+		printf("Error, bad number of argument\n");
 	if (argc != 2)
 		return (0);
-	if (!init_info(&info, argv[1]))
-		return (0);
-
-	sl_displaymap(info.map, info.img, 0);
+	init_info(&info, argv[1]);
+	sl_displaymap(info.map, info.img, 0, info.coll);
 	mlx_key_hook(info.img[6], deal_key, (void *)&info);
 	mlx_loop(info.img[5]);
 }

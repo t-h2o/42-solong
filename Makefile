@@ -11,9 +11,10 @@ DIR_OBJ	=	./objs
 #	Sources
 
 SRCS	=	${DIR_SRC}/main.c	\
-			${DIR_SRC}/map.c	\
-			${DIR_SRC}/player.c	\
-			${DIR_SRC}/get_next_line.c
+		${DIR_SRC}/map.c	\
+		${DIR_SRC}/player.c	\
+		${DIR_SRC}/brexit.c	\
+		${DIR_SRC}/get_next_line.c
 
 OBJS	=	${addprefix ${DIR_OBJ}/, ${notdir ${SRCS:.c=.o}}}
 

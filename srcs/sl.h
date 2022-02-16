@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:11:08 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/11 12:12:49 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/16 11:14:46 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct	s_info {
 
 # define SPRITE_SIZE 64
 # define BUFFER_SIZE 42
+# define COLOR	0x00ff0000
 
 # ifdef __APPLE__
 
@@ -83,11 +84,12 @@ char	*get_next_line(int fd);
 
 	//	map.c
 
-char	**sl_map(char *s, int *lenght, int *width);
+void	sl_map(t_info *info, char *file);
 
 	//	player.c
 
 int		deal_key(int key, void *param);
-void	sl_displaymap(char **map, void **img, int move);
-void	it_is_the_end(t_info *param);
+void	sl_displaymap(char **map, void **img, int move, int coll);
+void	it_is_the_end(t_info *param, int option, char *msg);
+
 #endif /* SL_H */

@@ -6,139 +6,92 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:18:19 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/03 14:22:06 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/16 14:59:10 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"sl.h"
 
-static int
-	all_one(char *line, int *len)
+static int	ft_strlen(char *s)
 {
 	int	i;
 
-	i = -1;
-	while (line[++i])
-	{
-		if (line[i] != '1')
-		{
-			printf("There is a hole up or down side\n");
-			return (1);
-		}
-	}
-	if (*len && i != *len)
-	{
-		printf("last line isn't same size\n");
-		return (1);
-	}
-	*len = i;
-	return (0);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
-/*	check the line if there is only '1' character
- */
 
-static int
-	map_error(char **map, int *lenght)
+static void
+	all_one(t_info *info, char *str)
 {
-	int	i;
-	int	j;
-	int	len;
-
-	len = 0;
-	if (all_one(map[0], &len))
-		return (1);
-	j = 0;
-	while (map[++j])
+	while (*str)
 	{
-		i = -1;
-		while (map[j][++i])
-		{
-			if ((i == 0 || i == len - 1) && map[j][i] != '1')
-			{
-				printf("There is a hole right or left\n");
-				return (1);
-			}
-		}
-		if (len != i)
-		{
-			printf("There is asometrie\n");
-			return (1);
-		}
+		if (*str != '1')
+			it_is_the_end(info, 1, "Error, missing a wall (top/bottom)");
+		str++;
 	}
-	if (all_one(map[j - 1], &len))
-		return (1);
-	*lenght = len;
-	return (0);
 }
 
-static int
-	width_counter(char *s)
+static void
+	map_error_wall(t_info *info, char **map)
 {
-	char	*l;
-	int		fd;
-	int		n;
+	int	y;
 
-	n = 0;
-	fd = open(s, O_RDONLY);
-	if (read(fd, 0, 0) != 0)
-		exit(0);
-	n = 0;
-	l = (char *) 1;
-	while (l)
+	y = -1;
+	all_one(info, map[0]);
+	while (map[++y])
 	{
-		l = get_next_line(fd);
-		if (!n && !l)
-			exit(0);
-		free(l);
-		n++;
+		if (ft_strlen(map[y]) != info->lenght)
+			it_is_the_end(info, 1, "Error, not same lenght");
+		if (map[y][0] != '1' || map[y][info->lenght - 1] != '1')
+			it_is_the_end(info, 1, "Error, missing wall (left/right)");
 	}
-	if (n < 4)
-		exit(0);
-	close(fd);
-	return (n);
+	all_one(info, map[y - 1]);
 }
-/*	counter of line of the file
- */
 
-static char
-	**map_create(char *s, int *width)
+static void
+	map_create(t_info *info, char *file)
 {
 	int		fd;
 	int		i;
-	char	**r;
 
-	*width = width_counter(s);
-	r = (char **)malloc(sizeof(char *) * *width);
-	if (!r)
-		return (0);
-	r[*width] = 0;
-	fd = open(s, O_RDONLY);
+	info->map = (char **)malloc(sizeof(char *) * 16);
+	i = -1;
+	while (++i < 16)
+		info->map[i] = 0;
+	if (!info->map)
+		it_is_the_end(info, 0, "Error, malloc map");
+	fd = open(file, O_RDONLY);
+	info->width = 0;
 	i = 0;
-	while (i < *width)
-		r[i++] = get_next_line(fd);
+	while (i < 16)
+	{
+		info->map[i] = get_next_line(fd);
+		info->width = i + 1;
+		if (!info->map[i])
+			break ;
+		i++;
+	}
 	close(fd);
-	return (r);
+	printf("La hauteur vaut %d\n", info->width);
+	if (info->width < 4)
+		it_is_the_end(info, 1, "Error, too few line");
+	if (info->width >= 16)
+		it_is_the_end(info, 1, "Error, too much line");
 }
-/*	malloc the memory of the map
+/*	malloc the tab of 16 of line
  *	and set every line in the map
  */
 
-char
-	**sl_map(char *s, int *lenght, int *width)
+void
+	sl_map(t_info *info, char *file)
 {
-	char	**r;
-
-	*lenght = 0;
-	*width = 0;
-	r = map_create(s, width);
-	if (!r)
-	{
-		printf("Error, malloc\n");
-		exit(0);
-	}
-	if (map_error(r, lenght))
-		exit(0);
-	return (r);
+	map_create(info, file);
+	info->lenght = ft_strlen(info->map[0]);
+	printf("\n1st line is %d lenght\n\n", info->lenght);
+	map_error_wall(info, info->map);
 }
-/*	Return a map and check if error
+/*	set the map,
+ *	or exit if error
  */

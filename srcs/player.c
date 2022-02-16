@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:18:05 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/11 12:13:09 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/16 12:39:33 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,6 @@ static int
 	6 MLX_WIN
 */
 
-void
-	it_is_the_end(t_info *param)
-{
-	char	**map;
-	void	**img;
-
-	map = param->map;
-	while (*map)
-	{	
-		printf("free(%p) : %s\n", *map, *map);
-		free(*(map++));
-	}
-	img = param->img;
-	mlx_destroy_window(img[5], img[6]);
-	printf("free(%p) : img\n", img);
-	free(img);
-	exit(0);
-}
-/*	free the map and destroy the window
- */
 
 static void
 	move_player(int movex, int movey, t_info *param)
@@ -61,7 +41,7 @@ static void
 	if (param->map[param->py + movey][param->px + movex] == 'E')
 	{
 		if (!param->coll)
-			it_is_the_end(param);
+			it_is_the_end(param, 1, "Erro, 0 collectible");
 		return ;
 	}
 	if (param->map[param->py + movey][param->px + movex] == 'C')
@@ -71,7 +51,7 @@ static void
 	param->px += movex;
 	param->py += movey;
 	param->map[param->py][param->px] = 'P';
-	sl_displaymap(param->map, param->img, param->move);
+	sl_displaymap(param->map, param->img, param->move, param->coll);
 }
 
 char
@@ -101,37 +81,29 @@ char
  */
 
 void
-	sl_displaymap(char **map, void **img, int move)
+	sl_displaymap(char **map, void **img, int move, int coll)
 {
 	int	x;
 	int	y;
-	int	xi;
-	int	yi;
 	int	c;
 
 	x = 0;
-	xi = 0;
 	y = -1;
-	yi = 0;
 	while (map[++y])
 	{
 		x = -1;
-		xi = 0;
 		while (map[y][++x])
 		{
 			c = sl_conv(map[y][x]);
 			mlx_put_image_to_window(img[5], img[6], img[c], x * 64, y * 64);
-			xi += SPRITE_SIZE;
 		}
-		yi += SPRITE_SIZE;
 	}
-	while (xi)
-	{
-		xi -= SPRITE_SIZE;
-		mlx_put_image_to_window(img[5], img[6], img[7], xi, yi);
-	}
-	mlx_string_put(img[5], img[6], 10, yi + 37, 0x00ff0000, "Move :");
-	mlx_string_put(img[5], img[6], 10 + 36, yi + 37, 0x00ff0000, ft_itoa(move));
+	while (x--)
+		mlx_put_image_to_window(img[5], img[6], img[7], x * 64, y * 64);
+	mlx_string_put(img[5], img[6], 10, y * 64 + 37, COLOR, "Move :");
+	mlx_string_put(img[5], img[6], 10 + 36, y * 64 + 37, COLOR, ft_itoa(move));
+	mlx_string_put(img[5], img[6], 64, y * 64 + 37, COLOR, "Item :");
+	mlx_string_put(img[5], img[6], 64 + 36, y * 64 + 37, COLOR, ft_itoa(coll));
 }
 /*	Every move of the player,
  *	the map is refresh...
@@ -149,7 +121,7 @@ int
 	else if (key == KEY_UP || key == KEY_W)
 		move_player(0, -1, param);
 	else if (key == KEY_ESC)
-		it_is_the_end(param);
+		it_is_the_end(param, 1, "ESC pressed");
 	else
 		printf("key pressed : %d\n", key);
 	return (0);
