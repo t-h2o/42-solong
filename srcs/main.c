@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:17:02 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/11 12:15:26 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/14 18:18:15 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int
 {
 	info->img = (void **)malloc(sizeof(void *) * 9);
 	if (!info->img)
-		return (0);
+		exit (0);
 	info->img[8] = 0;
 	info->map = sl_map(argv, &info->lenght, &info->width);
 	if (!info->map)
@@ -100,6 +100,9 @@ int
 	info->move = 0;
 	return (1);
 }
+/*	Set info data
+ *	if the 1st malloc fail, exit
+ */
 
 int
 	main(int argc, char **argv)
@@ -117,3 +120,9 @@ int
 	mlx_key_hook(info.img[6], deal_key, (void *)&info);
 	mlx_loop(info.img[5]);
 }
+/*	check arguments
+ *	init info game
+ *	display map once
+ *	init key hook
+ *	loop
+ */
