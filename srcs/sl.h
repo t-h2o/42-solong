@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:11:08 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/16 11:14:46 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/16 16:33:25 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct	s_info {
 	int		width;
 	int		px;
 	int		py;
+	int		player;
+	int		exit;
 	int		coll;
 	int		move;
 	void	**img;
@@ -86,10 +88,16 @@ char	*get_next_line(int fd);
 
 void	sl_map(t_info *info, char *file);
 
+	//	brexit.c
+
+void	it_is_the_end(t_info *param, int option, char *msg);
+
 	//	player.c
 
 int		deal_key(int key, void *param);
 void	sl_displaymap(char **map, void **img, int move, int coll);
-void	it_is_the_end(t_info *param, int option, char *msg);
 
+	//	info.c
+
+void	info_map(t_info *info);
 #endif /* SL_H */

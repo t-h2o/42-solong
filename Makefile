@@ -12,6 +12,7 @@ DIR_OBJ	=	./objs
 
 SRCS	=	${DIR_SRC}/main.c	\
 		${DIR_SRC}/map.c	\
+		${DIR_SRC}/info.c	\
 		${DIR_SRC}/player.c	\
 		${DIR_SRC}/brexit.c	\
 		${DIR_SRC}/get_next_line.c

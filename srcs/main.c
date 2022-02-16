@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:17:02 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/16 12:44:32 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/16 16:34:18 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,52 +39,6 @@ static void
  *	This function set my tab of image
  */
 
-void
-	find_player(char **map, int *x, int *y, int *coll)
-{
-	int	line;
-	int	colo;
-	int	doorexit;
-	int	nbplayer;
-
-	nbplayer = 0;
-	line = 0;
-	*coll = 0;
-	doorexit = 0;
-	while (map[line])
-	{
-		colo = 0;
-		while (map[line][colo])
-		{
-			if (map[line][colo] == 'C')
-				(*coll)++;
-			if (map[line][colo] == 'E')
-				doorexit++;
-			if (map[line][colo] == 'P')
-			{
-				if (nbplayer)
-				{
-					printf("Error, there is more than 1 player\n");
-					exit(0);
-				}
-				*x = colo;
-				*y = line;
-				nbplayer = 1;
-			}
-			colo++;
-		}
-		line++;
-	}
-	if (!coll || !doorexit)
-	{
-		printf("Error, there is 0 item or 0 exit door\n");
-		exit(0);
-	}
-}
-/*	Give the position of the player by x and y.
- *	Give the number of collectible in the map
- */
-
 static void
 	init_info(t_info *info, char *argv)
 {
@@ -94,7 +48,7 @@ static void
 	info->img[8] = 0;
 	sl_map(info, argv);
 	sl_ptr(info->img, info->lenght, info->width);
-	find_player(info->map, &info->px, &info->py, &info->coll);
+	info_map(info);
 	info->move = 0;
 }
 /*	Set info data
