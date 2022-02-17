@@ -2,69 +2,58 @@
 
 NAME	=	so_long	
 CC		=	gcc
+CFLAGS	=	-Wall -Wextra -Werror
 
-#	Directories
-
-DIR_SRC	=	./srcs
-DIR_OBJ	=	./objs
 
 #	Sources
 
+DIR_SRC	=	./srcs
 SRCS	=	${DIR_SRC}/main.c	\
-		${DIR_SRC}/map.c	\
-		${DIR_SRC}/info.c	\
-		${DIR_SRC}/player.c	\
-		${DIR_SRC}/brexit.c	\
-		${DIR_SRC}/get_next_line.c
+			${DIR_SRC}/map.c	\
+			${DIR_SRC}/info.c	\
+			${DIR_SRC}/player.c	\
+			${DIR_SRC}/brexit.c	\
+			${DIR_SRC}/get_next_line.c
 
+DIR_OBJ	=	./objs
 OBJS	=	${addprefix ${DIR_OBJ}/, ${notdir ${SRCS:.c=.o}}}
+
 
 #	Find the os
 
 UNAME_S := $(shell uname -s)
 
 
-INCLIB	=	/usr/lib
+#	Linux
+#	$(CC) $(OBJS) -L${DIR_LIB_MLX}/ -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
-RM		=	rm -f
-
-	#	Linux
 ifeq ($(UNAME_S),Linux)
 	DIR_LIB_MLX	=	./mlx-linux
-	LIB_MLX		+=	-lmlx_linux
-	
 	DIR_LIB_SYS	=	./usr/lib
-	LIB_SYS		+=	-lmlx_Linux
-	LIB_SYS		+=	-lXext
-	LIB_SYS		+=	-lX11
-	LIB_SYS		+=	-lm
-	LIB_SYS		+=	-lz
+	OFLAGS		=	-L${DIR_LIB_MLX} -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 endif
 
-	#	Apple
+
+#	Apple
+#	$(CC) $(OBJS) -L${DIR_LIB_MLX}/ -Imlx -lmlx -o $(NAME)
+#	$(CC) $(OBJS) -L${DIR_LIB_MLX}/ -Imlx-apple -lmlx -o $(NAME)
+
 ifeq ($(UNAME_S),Darwin)
 	DIR_LIB_MLX	=	./mlx-apple
-	LIB_MLX		+=	-lmlx
+	OFLAGS		=	-L${DIR_LIB_MLX} -lmlx -framework OpenGL -framework AppKit
 endif
 
 vpath %.c ${DIR_SRC}
+RM		=	rm -f
+
 
 all : ${NAME}
 
-
-	#	LINUX Compilation
-#	$(CC) $(OBJS) -L${DIR_LIB_MLX}/ -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
-
-	#	APPLE Compilation
-#	$(CC) $(OBJS) -L${DIR_LIB_MLX}/ -Imlx -lmlx -o $(NAME)
-
-
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -L${DIR_LIB_MLX}/ -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
-	#$(CC) $(OBJS) -L${DIR_LIB_MLX}/ -Imlx-apple -lmlx -o $(NAME)
+	$(CC) $(OBJS) -L${DIR_LIB_MLX} ${OFLAGS} -o $(NAME)
 
 ${DIR_OBJ}/%.o : %.c | ${DIR_OBJ}
-	$(CC) -Wall -Wextra -Werror -I/usr/include -I${DIR_LIB_MLX} -O3 -c $< -o $@
+	$(CC) ${CFLAGS} -I${DIR_LIB_MLX} -O3 -c $< -o $@
 
 ${DIR_OBJ} :
 	@mkdir -p ${DIR_OBJ}
@@ -76,7 +65,6 @@ fclean:	clean
 	${RM} ${NAME}
 
 re:		fclean all
-
 
 norm:
 	norminette ${SRCS}

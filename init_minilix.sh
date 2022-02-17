@@ -20,7 +20,7 @@ then
 	exit
 fi
 
-if [ $UNAME -eq "Darwin" ]
+if [ $UNAME == "Darwin" ]
 then
 #	Download this minilibx in the intra 42
 	echo this is a Mac os
@@ -28,7 +28,7 @@ then
 	mv minilibx_mms_20200219 mlx-apple
 	make -C mlx-apple/
 	cp mlx-apple/libmlx.dylib ./
-	
+	./so_long Map/map_1.ber
 	exit
 fi
 
