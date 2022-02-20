@@ -6,7 +6,7 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 12:34:05 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/16 14:02:03 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/20 17:31:34 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,21 @@ static void
  *	free tab of line
  */
 
+int
+	it_is_the_end_red_cross(t_info *info)
+{
+	it_is_the_end(info, 2, "red cross pressed");
+	return (0);
+}
+
 void
 	it_is_the_end(t_info *param, int option, char *msg)
 {
 	void	**img;
 
-	printf("%s\n", msg);
+	printf("\n\n\t--- stop message  ---\n");
+	printf("\t%s\n", msg);
+	printf("\t--- stop message  ---\n\n");
 	if (option)
 		free_map(param->map);
 	img = param->img;

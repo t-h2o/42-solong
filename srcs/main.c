@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:17:02 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/16 16:34:18 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/20 16:41:39 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int
 	init_info(&info, argv[1]);
 	sl_displaymap(info.map, info.img, 0, info.coll);
 	mlx_key_hook(info.img[6], deal_key, (void *)&info);
+	mlx_hook(info.img[6], 17, 1L, it_is_the_end_red_cross, &info);
 	mlx_loop(info.img[5]);
 }
 /*	check arguments

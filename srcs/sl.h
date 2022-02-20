@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:11:08 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/16 17:00:32 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/20 16:38:58 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	sl_map(t_info *info, char *file);
 	//	brexit.c
 
 void	it_is_the_end(t_info *param, int option, char *msg);
+int		it_is_the_end_red_cross(t_info *info);
 
 	//	player.c
 

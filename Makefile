@@ -2,7 +2,7 @@
 
 NAME	=	so_long	
 CC		=	gcc
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror #-fsanitize=address
 
 
 #	Sources
@@ -50,7 +50,7 @@ RM		=	rm -f
 all : ${NAME}
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -L${DIR_LIB_MLX} ${OFLAGS} -o $(NAME)
+	$(CC) -fsanitize=address $(OBJS) -L${DIR_LIB_MLX} ${OFLAGS} -o $(NAME)
 
 ${DIR_OBJ}/%.o : %.c | ${DIR_OBJ}
 	$(CC) ${CFLAGS} -I${DIR_LIB_MLX} -O3 -c $< -o $@

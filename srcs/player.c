@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:18:05 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/16 16:58:39 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/20 16:32:32 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,10 @@ char
 void
 	sl_displaymap(char **map, void **img, int move, int coll)
 {
-	int	x;
-	int	y;
-	int	c;
+	int		x;
+	int		y;
+	int		c;
+	char	*nb;
 
 	x = 0;
 	y = -1;
@@ -100,9 +101,13 @@ void
 	while (x--)
 		mlx_put_image_to_window(img[5], img[6], img[7], x * 64, y * 64);
 	mlx_string_put(img[5], img[6], 10, y * 64 + 37, COLOR, "Move :");
-	mlx_string_put(img[5], img[6], 10 + 36, y * 64 + 37, COLOR, ft_itoa(move));
+	nb = ft_itoa(move);
+	mlx_string_put(img[5], img[6], 10 + 36, y * 64 + 37, COLOR, nb);
+	free(nb);
 	mlx_string_put(img[5], img[6], 64, y * 64 + 37, COLOR, "Item :");
-	mlx_string_put(img[5], img[6], 64 + 36, y * 64 + 37, COLOR, ft_itoa(coll));
+	nb = ft_itoa(coll);
+	mlx_string_put(img[5], img[6], 64 + 36, y * 64 + 37, COLOR, nb);
+	free(nb);
 }
 /*	Every move of the player,
  *	the map is refresh...
