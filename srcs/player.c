@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:18:05 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/20 16:32:32 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/20 17:38:31 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void
 {
 	int		x;
 	int		y;
-	int		c;
 	char	*nb;
 
 	x = 0;
@@ -93,10 +92,8 @@ void
 	{
 		x = -1;
 		while (map[y][++x])
-		{
-			c = sl_conv(map[y][x]);
-			mlx_put_image_to_window(img[5], img[6], img[c], x * 64, y * 64);
-		}
+			mlx_put_image_to_window(img[5], img[6],
+				img[sl_conv(map[y][x])], x * 64, y * 64);
 	}
 	while (x--)
 		mlx_put_image_to_window(img[5], img[6], img[7], x * 64, y * 64);
