@@ -22,12 +22,19 @@ fi
 
 if [ $UNAME == "Darwin" ]
 then
-#	Download this minilibx in the intra 42
 	echo this is a Mac os
-	tar -xvzf minilibx_mms_20200219_beta.tgz
-	mv minilibx_mms_20200219 mlx-apple
+	
+	# Download this minilibx in the intra 42
+	# this one ...
+	# minilibx_opengl.tgz
+	# ... not this one !
+	# minilibx_mms_20200219_beta.tgz
+	
+	curl -O https://projects.intra.42.fr/uploads/document/document/7125/minilibx_opengl.tgz
+	tar -xvzf minilibx_opengl.tgz
+	mv minilibx_opengl_20191021 mlx-apple
 	make -C mlx-apple/
-	cp mlx-apple/libmlx.dylib ./
+	make
 	./so_long Map/map_1.ber
 	exit
 fi
