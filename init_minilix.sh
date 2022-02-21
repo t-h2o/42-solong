@@ -32,6 +32,7 @@ then
 	
 	curl -O https://projects.intra.42.fr/uploads/document/document/7125/minilibx_opengl.tgz
 	tar -xvzf minilibx_opengl.tgz
+	rm minilibx_opengl.tgz
 	mv minilibx_opengl_20191021 mlx-apple
 	make -C mlx-apple/
 	make
