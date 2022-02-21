@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:17:02 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/20 16:41:39 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/21 13:40:24 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,21 @@ static void
 {
 	int		img_width;
 	int		img_height;
-	char	*path[6];
 
-	path[0] = "./Assets/empty.xpm";
-	path[1] = "./Assets/wall.xpm";
-	path[2] = "./Assets/player.xpm";
-	path[3] = "./Assets/collectible.xpm";
-	path[4] = "./Assets/exit.xpm";
-	path[5] = "./Assets/info.xpm";
 	img[5] = mlx_init();
 	img[6] = mlx_new_window(img[5], lenght * 64, width * 64, "So long!");
-	img[0] = mlx_xpm_file_to_image(img[5], path[0], &img_width, &img_height);
-	img[1] = mlx_xpm_file_to_image(img[5], path[1], &img_width, &img_height);
-	img[2] = mlx_xpm_file_to_image(img[5], path[2], &img_width, &img_height);
-	img[3] = mlx_xpm_file_to_image(img[5], path[3], &img_width, &img_height);
-	img[4] = mlx_xpm_file_to_image(img[5], path[4], &img_width, &img_height);
-	img[7] = mlx_xpm_file_to_image(img[5], path[5], &img_width, &img_height);
+	img[0] = mlx_xpm_file_to_image(img[5], "./assets/empty.xpm",
+			&img_width, &img_height);
+	img[1] = mlx_xpm_file_to_image(img[5], "./assets/wall.xpm",
+			&img_width, &img_height);
+	img[2] = mlx_xpm_file_to_image(img[5], "./assets/player.xpm",
+			&img_width, &img_height);
+	img[3] = mlx_xpm_file_to_image(img[5], "./assets/collectible.xpm",
+			&img_width, &img_height);
+	img[4] = mlx_xpm_file_to_image(img[5], "./assets/exit.xpm",
+			&img_width, &img_height);
+	img[7] = mlx_xpm_file_to_image(img[5], "./assets/info.xpm",
+			&img_width, &img_height);
 }
 /*	to not be longer than 80 caracters,
  *	I set a tab of paths...

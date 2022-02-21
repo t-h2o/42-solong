@@ -6,7 +6,7 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 12:34:05 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/20 17:31:34 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/21 13:32:55 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,11 @@ static void
 
 	i = 0;
 	while (i < 16 && map[i])
-	{	
-		printf("%.2d | free(%p) : %s\n", i, map[i], map[i]);
 		free(map[i++]);
-	}
 	free(map);
-	printf("free the tab of line\n");
 }
 /*	Free each line
- *	free tab of line
+ *	free tab
  */
 
 int
@@ -44,15 +40,12 @@ void
 
 	printf("\n\n\t--- stop message  ---\n");
 	printf("\t%s\n", msg);
-	printf("\t--- stop message  ---\n\n");
+	printf("\t---------------------\n\n");
 	if (option)
 		free_map(param->map);
 	img = param->img;
 	if (option == 2)
-		printf("destroy the window");
-	if (option == 2)
 		mlx_destroy_window(img[5], img[6]);
-	printf("free(%p) : img\n", img);
 	free(param->img);
 	exit(0);
 }

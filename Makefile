@@ -50,6 +50,7 @@ RM		=	rm -f
 all : ${NAME}
 
 $(NAME): $(OBJS)
+	make -C ${DIR_LIB_MLX}
 	$(CC) -fsanitize=address $(OBJS) -L${DIR_LIB_MLX} ${OFLAGS} -o $(NAME)
 
 ${DIR_OBJ}/%.o : %.c | ${DIR_OBJ}
@@ -59,12 +60,14 @@ ${DIR_OBJ} :
 	@mkdir -p ${DIR_OBJ}
 
 clean:
+	make clean -C ${DIR_LIB_MLX}
 	${RM} ${OBJS}
 
 fclean:	clean
 	${RM} ${NAME}
 
 re:		fclean all
+	make re -C ${DIR_LIB_MLX}
 
 norm:
 	norminette ${SRCS}

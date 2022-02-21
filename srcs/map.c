@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:18:19 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/16 16:59:39 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/21 13:33:45 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static void
 		i++;
 	}
 	close(fd);
-	printf("La hauteur vaut %d\n", info->width);
 	if (info->width < 4)
 		it_is_the_end(info, 1, "Error, too few line");
 	if (info->width >= 16)
@@ -86,7 +85,6 @@ void
 {
 	map_create(info, file);
 	info->lenght = ft_strlen(info->map[0]);
-	printf("\n1st line is %d lenght\n\n", info->lenght);
 	map_error_wall(info, info->map);
 }
 /*	set the map,
