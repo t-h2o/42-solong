@@ -12,9 +12,9 @@ change file type, png to xpm.
 
 For make a transparency, find the backgound color and set to ```none```
 
-![Sprite](Assets/readme/assets.gif)
+![Sprite](assets/readme/assets.gif)
 
-![all](Assets/readme/assets.png)
+![all](assets/readme/assets.png)
 
 
 ### Map
@@ -32,7 +32,7 @@ P for the player
 1111111111111
 ```
 
-![Map](Assets/readme/map.png)
+![Map](assets/readme/map.png)
 
 ##	program
 
