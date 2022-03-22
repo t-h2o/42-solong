@@ -1,3 +1,5 @@
+#!/bin/bash
+
 UNAME=`uname -s`
 
 LINUX_PKG+="xorg "
